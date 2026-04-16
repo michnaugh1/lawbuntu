@@ -88,32 +88,82 @@ Each `~/OpenCases/Lastname, Firstname/` folder *is* a matter. The daemon indexes
 
 **Minimum viable matter:** folder name alone. Time can be attributed to `Smith, John` the moment the folder exists.
 
-**Enriched metadata:** optional `.matter.yaml` sidecar in the matter folder.
+**Enriched metadata:** optional `.matter.yaml` sidecar in the matter folder. Two schemas depending on matter type.
+
+**Person matter (defendant representation):**
 
 ```yaml
 client:
   last: Smith
   first: John
+  middle: ""                    # optional
+  dob: 1985-03-14               # optional; useful for CJA-20 and conflict checks
+  phone: "231-555-0100"         # optional
+  email: "jsmith@email.com"     # optional
 matter_type: federal_cja        # federal_cja | retained_hourly | retained_flat | pro_bono | consultation
 status: active                  # active | closed | on_hold
+date_opened: 2026-01-15         # optional
+date_closed:                    # optional; set to trigger status: closed
 court:
   name: "U.S. District Court, W.D. Mich."
+  division: "Northern Division" # optional
   case_number: "1:26-cr-00123"
   judge: "Hon. Jane Doe"
+  county: "Ogemaw"              # state matters; Michigan has 83 counties
 appointment_date: 2026-02-14    # federal_cja only
+charges:                        # optional; criminal offense codes
+  - "18 U.S.C. § 922(g)(1)"
+  - "21 U.S.C. § 841(a)(1)"
+co_counsel:                     # optional
+  - name: "Jane Attorney"
+    bar_number: "P12345"
 billing:
   # Exactly one of the following:
   flat_fee: 5000.00             # retained_flat
+  retainer_paid: 2500.00        # optional; amount actually received
   # hourly_rate: 350.00         # retained_hourly
-  # cja_rate: 175.00            # federal_cja — verify current year's non-capital rate at uscourts.gov/cja-guidelines; user-configurable
+  # cja_rate: 175.00            # federal_cja — verify current year's non-capital rate at uscourts.gov/cja-guidelines
   underwater_threshold: 150.00  # retained_flat only: alert when effective $/hr drops below this
-aliases:                        # strings used for matter inference in titles/URLs
+aliases:                        # strings for matter inference in window titles / tab URLs
   - "Smith"
   - "1:26-cr-00123"
   - "Smith trafficking"
 opposing_party: "United States of America"
+next_hearing: 2026-05-10        # optional; shown in top-bar when this matter is active
+referral_source: "Bar referral" # optional; practice analytics
 notes: "Suppression motion due 2026-05-10"
 ```
+
+**Organization matter (contracts, program administration):**
+
+```yaml
+client:
+  organization: "Ogemaw County"
+  contact_name: "County Administrator"  # optional
+  contact_phone: "989-555-0100"         # optional
+matter_type: program_admin              # program_admin uses hourly billing; no court/charges/opposing_party
+status: active
+date_opened: 2026-01-01
+billing:
+  hourly_rate: 200.00
+aliases:                        # critical for browser-heavy inference; be generous
+  - "Special Assignment"
+  - "Ogemaw"
+  - "Ogemaw County"
+  - "panel"
+notes: "State of Michigan Special Assignment program; invoice to Ogemaw County monthly"
+```
+
+**Matter types:**
+- `federal_cja` — CJA panel; CJA-20 category tagging; reimbursement CSV export
+- `retained_hourly` — defendant, hourly; invoice PDF export
+- `retained_flat` — defendant, flat fee; flat-fee analytics + underwater alerts
+- `pro_bono` — tracked but not billed
+- `consultation` — short-engagement hourly
+- `program_admin` — contract/program work billed to an organization; hourly invoice; no court fields
+
+**Folder naming convention for non-person matters:**
+Folders that do not match the `Lastname, Firstname` pattern require a `.matter.yaml` with `client.organization` to be indexed. The daemon flags non-conforming folders without a sidecar and surfaces them in the review app as "unrecognized matter — add `.matter.yaml`." Example folder: `~/OpenCases/Special Assignment - Ogemaw/`.
 
 **Why a YAML sidecar, not a central DB**
 
