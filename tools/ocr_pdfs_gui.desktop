@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=PDF OCR — Make Searchable
+Comment=Make a folder of PDF files text-searchable using OCR
+Exec=python3 /usr/local/share/ocr-pdfs/ocr_pdfs_gui.py
+Icon=document-open
+Terminal=false
+Categories=Office;
+Keywords=PDF;OCR;searchable;text;scan;
+StartupNotify=true
