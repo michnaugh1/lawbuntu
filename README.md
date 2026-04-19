@@ -44,6 +44,22 @@ sudo apt install tesseract-ocr-spa
 
 ## Installation
 
+### Option 1: Snap (recommended)
+
+Build and install locally:
+
+```bash
+git clone https://github.com/YOUR_USERNAME/ubuntu-lawyers.git
+cd ubuntu-lawyers
+snapcraft
+sudo snap install ocr-pdfs_1.0.0_amd64.snap --dangerous --classic
+```
+
+> Once published to the Snap Store, this will simply be:
+> `sudo snap install ocr-pdfs`
+
+### Option 2: Install from source
+
 Clone the repository and run the installer:
 
 ```bash
@@ -56,6 +72,12 @@ The app installs per-user (no `sudo` required) and appears in your GNOME applica
 
 ### Uninstall
 
+**Snap:**
+```bash
+sudo snap remove ocr-pdfs
+```
+
+**Source install:**
 ```bash
 bash tools/install.sh --uninstall
 ```
@@ -114,7 +136,7 @@ docs/
 
 ## Roadmap
 
-- [ ] Snap / Flatpak packaging for easy installation by other attorneys
+- [x] Snap packaging for easy installation by other attorneys
 - [ ] Language selection in the GUI
 - [ ] Additional tools (time tracking, invoice generation)
 
