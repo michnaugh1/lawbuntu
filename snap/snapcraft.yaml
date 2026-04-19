@@ -1,0 +1,49 @@
+name: ocr-pdfs
+version: '1.0.0'
+summary: Make a folder of PDF files text-searchable
+description: |
+  A simple tool for attorneys and legal professionals to make scanned
+  PDF files text-searchable using OCR. Select a folder, click one
+  button, and all PDFs are processed in-place.
+
+base: core22
+confinement: strict
+grade: devel
+
+icon: assets/ocr-pdfs.svg
+
+apps:
+  ocr-pdfs:
+    command: bin/launch-ocr-pdfs
+    extensions: [gnome]
+    plugs:
+      - home
+
+plugs:
+  home:
+    interface: home
+
+parts:
+  ocr-pdfs:
+    plugin: dump
+    source: .
+    source-type: local
+    organize:
+      tools/ocr_pdfs_gui.py: ocr_pdfs_gui.py
+      assets/ocr-pdfs.svg: assets/ocr-pdfs.svg
+      snap/local/launcher: bin/launch-ocr-pdfs
+    stage-packages:
+      - python3
+      - python3-gi
+      - python3-gi-cairo
+      - gir1.2-gtk-3.0
+      - ocrmypdf
+      - tesseract-ocr
+      - tesseract-ocr-eng
+    prime:
+      - ocr_pdfs_gui.py
+      - assets/
+      - bin/
+      - usr/
+      - -usr/share/doc
+      - -usr/share/man
