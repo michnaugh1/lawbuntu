@@ -33,7 +33,6 @@ parts:
       assets/ocr-pdfs.svg: assets/ocr-pdfs.svg
       snap/local/launcher: bin/launch-ocr-pdfs
     stage-packages:
-      - python3-minimal
       - python3-gi
       - python3-gi-cairo
       - ocrmypdf
