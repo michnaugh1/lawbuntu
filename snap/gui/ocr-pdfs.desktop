@@ -3,6 +3,7 @@ Type=Application
 Name=PDF OCR — Make Searchable
 Comment=Make a folder of PDF files text-searchable using OCR
 Icon=${SNAP}/assets/ocr-pdfs.svg
+Exec=ocr-pdfs
 Terminal=false
 Categories=Office;
 Keywords=PDF;OCR;searchable;text;scan;

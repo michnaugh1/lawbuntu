@@ -23,18 +23,10 @@ apps:
     extensions: [gnome]
     plugs:
       - home
-    slots:
-      - dbus-ocr-pdfs
 
 plugs:
   home:
     interface: home
-
-slots:
-  dbus-ocr-pdfs:
-    interface: dbus
-    bus: session
-    name: org.ubuntu-lawyers.ocr-pdfs
 
 parts:
   ocr-pdfs:

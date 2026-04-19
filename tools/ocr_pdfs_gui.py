@@ -69,7 +69,7 @@ def process_pdf(pdf_path, language='eng', rotate=False):
 class OcrApp(Gtk.Application):
 
     def __init__(self):
-        super().__init__(application_id='org.ubuntu-lawyers.ocr-pdfs')
+        super().__init__(application_id=None)
         self.window = None
 
     def do_activate(self):
