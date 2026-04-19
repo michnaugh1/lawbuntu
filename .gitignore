@@ -20,3 +20,10 @@ venv/
 .coverage
 htmlcov/
 .superpowers/
+
+# Snapcraft build artifacts
+*.snap
+parts/
+stage/
+prime/
+.snapcraft/
