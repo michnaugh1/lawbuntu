@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=PDF OCR — Make Searchable
+Comment=Make a folder of PDF files text-searchable using OCR
+Icon=${SNAP}/assets/ocr-pdfs.svg
+Terminal=false
+Categories=Office;
+Keywords=PDF;OCR;searchable;text;scan;
+StartupNotify=true
