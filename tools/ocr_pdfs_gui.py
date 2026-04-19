@@ -156,6 +156,7 @@ class OcrApp(Gtk.Application):
             Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
             'Select', Gtk.ResponseType.OK,
         )
+        dialog.set_current_folder(str(Path.home()))
         if dialog.run() == Gtk.ResponseType.OK:
             self.folder_entry.set_text(dialog.get_filename())
             self.start_btn.set_sensitive(True)
