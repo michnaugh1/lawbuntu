@@ -7,9 +7,9 @@ description: |
   PDF files text-searchable using OCR. Select a folder, click one
   button, and all PDFs are processed in-place.
 license: MIT
-contact: mike@thenorthcoastlegal.com
-issues: https://github.com/YOUR_USERNAME/ubuntu-lawyers/issues
-source-code: https://github.com/YOUR_USERNAME/ubuntu-lawyers
+contact: mike@justiceoptimized.com
+issues: https://github.com/michnaugh1/lawbuntu/issues
+source-code: https://github.com/michnaugh1/lawbuntu
 
 base: core24
 confinement: strict
