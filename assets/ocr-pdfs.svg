@@ -3,22 +3,14 @@
     <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
       <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#00000033"/>
     </filter>
-    <linearGradient id="docGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#4a9ff5"/>
-      <stop offset="100%" stop-color="#2d7dd2"/>
-    </linearGradient>
-    <linearGradient id="lensGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#ffd166"/>
-      <stop offset="100%" stop-color="#f4a522"/>
-    </linearGradient>
   </defs>
 
-  <!-- Document body -->
-  <rect x="30" y="16" width="138" height="174" rx="14" fill="url(#docGrad)" filter="url(#shadow)"/>
+  <!-- Document body — solid blue -->
+  <rect x="30" y="16" width="138" height="174" rx="14" fill="#2d7dd2" filter="url(#shadow)"/>
 
   <!-- Folded corner -->
   <path d="M132 16 L168 52 L132 52 Z" fill="#1c5fad"/>
-  <path d="M132 16 L168 52 L132 52 Z" fill="white" opacity="0.12"/>
+  <path d="M132 16 L168 52 L132 52 Z" fill="white" opacity="0.15"/>
 
   <!-- Text lines -->
   <rect x="48" y="76" width="72" height="10" rx="5" fill="white" opacity="0.55"/>
@@ -29,12 +21,12 @@
   <!-- Magnifying glass handle -->
   <line x1="186" y1="198" x2="234" y2="246" stroke="#3d3d3d" stroke-width="18" stroke-linecap="round"/>
 
-  <!-- Magnifying glass ring (no white fill — transparent inside) -->
+  <!-- Magnifying glass ring -->
   <circle cx="166" cy="176" r="54" fill="none" stroke="#3d3d3d" stroke-width="12"/>
 
-  <!-- Magnifying glass lens -->
-  <circle cx="166" cy="176" r="38" fill="url(#lensGrad)" opacity="0.92"/>
+  <!-- Lens — clear glass look, no yellow -->
+  <circle cx="166" cy="176" r="42" fill="white" opacity="0.15"/>
 
   <!-- Shine on lens -->
-  <circle cx="152" cy="162" r="10" fill="white" opacity="0.35"/>
+  <circle cx="152" cy="162" r="10" fill="white" opacity="0.30"/>
 </svg>
