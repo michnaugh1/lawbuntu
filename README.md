@@ -46,17 +46,18 @@ sudo apt install tesseract-ocr-spa
 
 ### Option 1: Snap (recommended)
 
-Build and install locally:
+```bash
+sudo snap install ocr-pdfs
+```
+
+Or build from source:
 
 ```bash
 git clone https://github.com/michnaugh1/lawbuntu.git
-cd ubuntu-lawyers
+cd lawbuntu
 snapcraft
-sudo snap install ocr-pdfs_1.0.0_amd64.snap --dangerous --classic
+sudo snap install ocr-pdfs_1.0.0_amd64.snap --dangerous
 ```
-
-> Once published to the Snap Store, this will simply be:
-> `sudo snap install ocr-pdfs`
 
 ### Option 2: Install from source
 
