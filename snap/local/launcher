@@ -1,2 +1,2 @@
 #!/bin/bash
-exec "$SNAP/usr/bin/python3" "$SNAP/ocr_pdfs_gui.py"
+exec python3 "$SNAP/ocr_pdfs_gui.py"
