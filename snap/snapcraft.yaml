@@ -1,10 +1,15 @@
 name: ocr-pdfs
 version: '1.0.0'
+title: PDF OCR — Make Searchable
 summary: Make a folder of PDF files text-searchable
 description: |
   A simple tool for attorneys and legal professionals to make scanned
   PDF files text-searchable using OCR. Select a folder, click one
   button, and all PDFs are processed in-place.
+license: MIT
+contact: mike@thenorthcoastlegal.com
+issues: https://github.com/YOUR_USERNAME/ubuntu-lawyers/issues
+source-code: https://github.com/YOUR_USERNAME/ubuntu-lawyers
 
 base: core24
 confinement: strict
@@ -18,10 +23,18 @@ apps:
     extensions: [gnome]
     plugs:
       - home
+    slots:
+      - dbus-ocr-pdfs
 
 plugs:
   home:
     interface: home
+
+slots:
+  dbus-ocr-pdfs:
+    interface: dbus
+    bus: session
+    name: org.ubuntu-lawyers.ocr-pdfs
 
 parts:
   ocr-pdfs:
