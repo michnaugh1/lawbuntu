@@ -1,0 +1,55 @@
+name: ocr-pdfs-kde
+version: '1.0.0'
+title: PDF OCR for KDE — Make Searchable
+summary: Make a folder of PDF files text-searchable (KDE/Qt edition)
+description: |
+  A simple tool for attorneys and legal professionals to make scanned
+  PDF files text-searchable using OCR. Select a folder, click one
+  button, and all PDFs are processed in-place. Sends a Plasma desktop
+  notification on completion.
+license: MIT
+contact: mike@justiceoptimized.com
+issues: https://github.com/michnaugh1/lawbuntu/issues
+source-code: https://github.com/michnaugh1/lawbuntu
+
+base: core24
+confinement: strict
+grade: stable
+
+icon: assets/ocr-pdfs.svg
+
+apps:
+  ocr-pdfs-kde:
+    command: bin/launch-ocr-pdfs-kde
+    extensions: [kde-neon]
+    plugs:
+      - home
+
+plugs:
+  home:
+    interface: home
+
+parts:
+  ocr-pdfs-kde:
+    plugin: dump
+    source: .
+    source-type: local
+    organize:
+      tools/ocr_backend.py: ocr_backend.py
+      tools/ocr_pdfs_qt.py: ocr_pdfs_qt.py
+      assets/ocr-pdfs.svg: assets/ocr-pdfs.svg
+      snap/local/launcher-kde: bin/launch-ocr-pdfs-kde
+    stage-packages:
+      - python3-pyqt6
+      - ocrmypdf
+      - tesseract-ocr
+      - tesseract-ocr-eng
+      - poppler-utils
+    prime:
+      - ocr_backend.py
+      - ocr_pdfs_qt.py
+      - assets/
+      - bin/
+      - usr/
+      - -usr/share/doc
+      - -usr/share/man
