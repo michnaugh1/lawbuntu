@@ -37,7 +37,7 @@ def process_pdf(pdf_path, language='eng', rotate=False):
     with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as tmp:
         tmp_path = Path(tmp.name)
 
-    cmd = ['ocrmypdf', '--skip-text', '--quiet', '-l', language,
+    cmd = ['ocrmypdf', '--skip-text', '--output-type', 'pdf', '--quiet', '-l', language,
            str(pdf_path), str(tmp_path)]
     if rotate:
         cmd.insert(-2, '--rotate-pages')
@@ -58,7 +58,8 @@ def process_pdf(pdf_path, language='eng', rotate=False):
         elif 'invalid' in stderr or 'not a pdf' in stderr or 'damaged' in stderr:
             msg = 'Could not process \u2014 file may be damaged'
         else:
-            msg = 'Could not process \u2014 unknown error'
+            detail = result.stderr.strip() or result.stdout.strip()
+            msg = f'Could not process \u2014 {detail}' if detail else 'Could not process \u2014 unknown error'
         return {'status': 'error', 'message': msg}
 
 

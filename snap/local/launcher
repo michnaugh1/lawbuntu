@@ -1,2 +1,11 @@
 #!/bin/bash
+GS_VERSION=$(ls "$SNAP/usr/share/ghostscript/" 2>/dev/null | grep -E '^[0-9]' | sort -V | tail -1)
+TESS_VERSION=$(ls "$SNAP/usr/share/tesseract-ocr/" 2>/dev/null | sort -V | tail -1)
+
+export PYTHONPATH="$SNAP/usr/lib/python3/dist-packages"
+export TESSDATA_PREFIX="$SNAP/usr/share/tesseract-ocr/$TESS_VERSION/tessdata"
+if [ -n "$GS_VERSION" ]; then
+    export GS_LIB="$SNAP/usr/share/ghostscript/$GS_VERSION/Resource/Init:$SNAP/usr/share/ghostscript/$GS_VERSION/Resource:$SNAP/usr/share/ghostscript/$GS_VERSION"
+fi
+
 exec python3 "$SNAP/ocr_pdfs_gui.py"

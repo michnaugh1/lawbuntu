@@ -1,5 +1,5 @@
 name: ocr-pdfs
-version: '1.0.0'
+version: '1.0.3'
 title: OCR PDF - Make PDFs Searchable
 summary: Make a folder of PDF files text-searchable
 description: |
@@ -43,6 +43,7 @@ parts:
       - ocrmypdf
       - tesseract-ocr
       - tesseract-ocr-eng
+      - poppler-utils
     prime:
       - ocr_pdfs_gui.py
       - assets/
