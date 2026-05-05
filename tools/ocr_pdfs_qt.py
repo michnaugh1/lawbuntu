@@ -126,6 +126,9 @@ class MainWindow(QMainWindow):
         folder = self.folder_entry.text()
         if not folder:
             return
+        if not check_ocrmypdf_installed():
+            self._show_missing_dependency_dialog()
+            return
 
         self.start_btn.setEnabled(False)
         self.browse_btn.setEnabled(False)
@@ -177,6 +180,8 @@ class MainWindow(QMainWindow):
         self.summary_label.show()
         self.start_btn.setEnabled(True)
         self.browse_btn.setEnabled(True)
+        self._worker = None
+        self._thread = None
 
         if QSystemTrayIcon.isSystemTrayAvailable():
             parts = []
