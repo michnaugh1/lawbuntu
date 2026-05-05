@@ -63,7 +63,7 @@ class TestCheckOcrmypdfInstalled(unittest.TestCase):
     def test_returns_false_when_not_on_path(self):
         from unittest.mock import patch
         from tools.ocr_backend import check_ocrmypdf_installed
-        with patch("shutil.which", return_value=None):
+        with patch("tools.ocr_backend.shutil.which", return_value=None):
             self.assertFalse(check_ocrmypdf_installed())
 
 
@@ -84,7 +84,7 @@ class TestProcessPdf(unittest.TestCase):
         from unittest.mock import patch, Mock
         from tools.ocr_backend import process_pdf
         pdf = self._make_pdf()
-        with patch("subprocess.run", return_value=Mock(returncode=6, stderr="")):
+        with patch("tools.ocr_backend.subprocess.run",return_value=Mock(returncode=6, stderr="")):
             result = process_pdf(pdf)
         self.assertEqual(result["status"], "skipped")
         self.assertTrue(pdf.exists())
@@ -98,7 +98,7 @@ class TestProcessPdf(unittest.TestCase):
             Path(cmd[-1]).write_bytes(b"%PDF-1.4 ocr processed")
             return Mock(returncode=0, stderr="")
 
-        with patch("subprocess.run", side_effect=fake_run):
+        with patch("tools.ocr_backend.subprocess.run",side_effect=fake_run):
             result = process_pdf(pdf)
         self.assertEqual(result["status"], "ok")
         self.assertTrue(pdf.exists())
@@ -107,7 +107,7 @@ class TestProcessPdf(unittest.TestCase):
         from unittest.mock import patch, Mock
         from tools.ocr_backend import process_pdf
         pdf = self._make_pdf()
-        with patch("subprocess.run", return_value=Mock(returncode=1, stderr="unknown error")):
+        with patch("tools.ocr_backend.subprocess.run",return_value=Mock(returncode=1, stderr="unknown error")):
             result = process_pdf(pdf)
         self.assertEqual(result["status"], "error")
         self.assertIn("message", result)
@@ -117,7 +117,7 @@ class TestProcessPdf(unittest.TestCase):
         from unittest.mock import patch, Mock
         from tools.ocr_backend import process_pdf
         pdf = self._make_pdf()
-        with patch("subprocess.run", return_value=Mock(returncode=1, stderr="encrypted password required")):
+        with patch("tools.ocr_backend.subprocess.run",return_value=Mock(returncode=1, stderr="encrypted password required")):
             result = process_pdf(pdf)
         self.assertIn("password", result["message"].lower())
 
@@ -125,7 +125,7 @@ class TestProcessPdf(unittest.TestCase):
         from unittest.mock import patch, Mock
         from tools.ocr_backend import process_pdf
         pdf = self._make_pdf()
-        with patch("subprocess.run", return_value=Mock(returncode=1, stderr="not a pdf invalid format")):
+        with patch("tools.ocr_backend.subprocess.run",return_value=Mock(returncode=1, stderr="not a pdf invalid format")):
             result = process_pdf(pdf)
         self.assertIn("damaged", result["message"].lower())
 
